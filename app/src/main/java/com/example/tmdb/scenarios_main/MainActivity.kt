@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
         val presenter : MainContract.Presenter = MainPresenter(this)
         presenter.onLoadList()
+
     }
 
     override fun showList(movies: List<Movie>) {

@@ -36,6 +36,7 @@ class TMDBAdapter (val context: Context, val movies: List<Movie>)
 
         fun bindView(context: Context, movie: Movie, itemClickListener: ((index: Int) -> Unit)?) {
             itemView.movieName.text = movie.title
+            itemView.movieGrade.text = movie.vote_average
 
             GlideApp.with(context)
                 .load(movie.poster_url)

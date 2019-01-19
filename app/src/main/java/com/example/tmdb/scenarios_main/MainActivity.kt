@@ -1,5 +1,6 @@
 package com.example.tmdb.scenarios_main
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -24,8 +25,21 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
         val adapter = TMDBAdapter(this, movies)
 
+        adapter.setOnItemClickListener { position ->
+            showLoading()
+            val presenter : MainContract.Presenter = MainPresenter(this)
+            presenter.onClickMovie(movies[position])
+
+        }
+
         rvMovies.adapter = adapter
         rvMovies.layoutManager = LinearLayoutManager(this)
+    }
+
+    override fun listMovieInDetail(movie: Movie){
+        /*val showInDetail = Intent(this, InDetailActivity::class.java)
+        showInDetail.putExtra(IN_DETAIL_VIEW, cocktail)
+        startActivity(showInDetail)*/
     }
 
     override fun showMessage(msg: String) {

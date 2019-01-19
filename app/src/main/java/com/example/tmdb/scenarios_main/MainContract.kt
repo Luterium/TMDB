@@ -7,10 +7,12 @@ interface MainContract {
         fun showMessage(msg: String)
         fun showList(movies: List<Movie>)
         fun showLoading()
+        fun listMovieInDetail(movie: Movie)
         fun hideLoading()
     }
 
     interface Presenter {
         fun onLoadList()
+        fun onClickMovie(movie: Movie)
     }
 }

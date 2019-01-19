@@ -1,38 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_marginTop="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="144dp"
-        android:orientation="horizontal">
-
-    <ImageView
-            android:id="@+id/imgMovie"
-            android:layout_width="96dp"
-            android:layout_height="144dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_gravity="center_vertical"
-            android:contentDescription="Imagem do filme"
-            android:scaleType="fitCenter"
-
-            />
-
-    <TextView
-            android:id="@+id/movieName"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="16sp"
-            android:gravity="center_vertical"
-            android:fontFamily="monospace"
-            android:maxLines="3"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:textColor="@color/black"
-            android:text="Movie X" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+        <ImageView
+                android:id="@+id/imgMovie"
+                android:layout_width="96dp"
+                android:layout_height="144dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="Imagem do filme"
+                android:scaleType="fitCenter"/>
+
+        <TextView
+                android:id="@+id/movieName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:gravity="center_vertical"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="3"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/white"/>
+
+    </LinearLayout>
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lightGray"/>
 </LinearLayout>

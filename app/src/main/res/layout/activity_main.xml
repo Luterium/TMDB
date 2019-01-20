@@ -15,9 +15,11 @@
             android:layout_gravity="center"
             android:visibility="invisible"/>
 
-    <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvMovies"
+    <FrameLayout
+            android:id="@+id/fmMaster"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/movie_list_item"/>
+            android:layout_height="match_parent">
+
+    </FrameLayout>
+
 </FrameLayout>

@@ -28,24 +28,26 @@ class MainPresenter(val view : MainContract.View) : MainContract.Presenter {
                 if(response.body() != null){
                     view.showList(response.body()!!)
                 }else {
-                    view.showMessage("Esse filme não está disponível")
+                    view.showMessage("Esses filmes não estão disponíveis")
                 }
             }
         })
-
     }
 
     override fun onClickMovie(movie: Movie) {
+        view.showLoading()
         val wholeUrl = StringBuilder()
         wholeUrl.append("https://desafio-mobile.nyc3.digitaloceanspaces.com/movies/")
         wholeUrl.append(movie.id)
-        val cocktailsService = RetrofitInitializer().createMoviesService()
-        val call = cocktailsService.getMovieInDetail(wholeUrl.toString())
+        val moviesService = RetrofitInitializer().createMoviesService()
+        val call = moviesService.getMovieInDetail(wholeUrl.toString())
         call.enqueue(object : Callback<DetailedMovie> {
             override fun onFailure(call: Call<DetailedMovie>, t: Throwable) {
+                view.hideLoading()
                 view.showMessage("Falha na conexão. Verifique o acesso a internet")
             }
             override fun onResponse(call: Call<DetailedMovie>, response: Response<DetailedMovie>) {
+                view.hideLoading()
                 if(response.body() != null) {
                     view.listMovieInDetail(response.body()!!)
                 } else {

@@ -1,7 +1,6 @@
 package com.example.tmdb.entities
 
 import java.io.Serializable
-
 data class Movie(
     val id:             Int,
     val vote_average:   String,

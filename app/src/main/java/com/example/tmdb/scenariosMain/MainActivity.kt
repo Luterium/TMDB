@@ -1,22 +1,22 @@
 package com.example.tmdb.scenariosMain
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.tmdb.R
 import com.example.tmdb.entities.DetailedMovie
 import com.example.tmdb.entities.Movie
-import com.example.tmdb.scenariosInDetail.DetailedActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), MainContract.View {
+class MainActivity : AppCompatActivity(), MainContract.View, MovieListFragment.OnFragmentInteractionListener{
+
+    private var presenter : MainContract.Presenter = MainPresenter(this)
 
     companion object {
         const val IN_DETAIL_VIEW = "detailedView"
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,24 +31,24 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun showList(movies: List<Movie>) {
 
-        val adapter = TMDBAdapter(this, movies)
+        val fragmentMovieList = MovieListFragment.newInstance(movies as ArrayList<Movie>)
 
-        adapter.setOnItemClickListener { position ->
-            showLoading()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fmMaster, fragmentMovieList)
+            .commit()
+    }
 
-            val presenter : MainContract.Presenter = MainPresenter(this)
-            presenter.onClickMovie(movies[position])
-
-        }
-
-        rvMovies.adapter = adapter
-        rvMovies.layoutManager = LinearLayoutManager(this)
+    override fun onFragmentInteraction(movie: Movie) {
+        showLoading()
+        presenter.onClickMovie(movie)
     }
 
     override fun listMovieInDetail(movie: DetailedMovie){
-        val showInDetail = Intent(this, DetailedActivity::class.java)
-        showInDetail.putExtra(IN_DETAIL_VIEW, movie)
-        startActivity(showInDetail)
+        val fragmentDetailed = DetailedMovieFragment.newInstance(movie)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fmMaster, fragmentDetailed)
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun showMessage(msg: String) {

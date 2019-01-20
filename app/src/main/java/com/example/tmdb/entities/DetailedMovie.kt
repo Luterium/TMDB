@@ -1,5 +1,7 @@
 package com.example.tmdb.entities
 
+import java.io.Serializable
+
 data class DetailedMovie (
     val backdrop_url:           String,
     val genres:                 List<String>,
@@ -14,4 +16,4 @@ data class DetailedMovie (
     val tagline:                String,
     val title:                  String,
     val vote_average:           String
-)
+):Serializable

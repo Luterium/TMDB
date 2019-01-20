@@ -1,3 +1,5 @@
 package com.example.tmdb.entities
 
-data class MovieList (val movies: List<Movie>)
+import java.io.Serializable
+
+data class MovieList (val movies: List<Movie>):Serializable

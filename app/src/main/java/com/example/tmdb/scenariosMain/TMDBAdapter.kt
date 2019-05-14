@@ -8,47 +8,38 @@ import android.view.ViewGroup
 import com.example.tmdb.R
 import com.example.tmdb.entities.Movie
 import com.example.tmdb.utils.GlideApp
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.kotlinandroidextensions.Item
+import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.movie_list_item.view.*
 
-class TMDBAdapter (val context: Context, val movies: List<Movie>)
-    : RecyclerView.Adapter<TMDBAdapter.ViewHolder>() {
+class TMDBAdapter(val context: Context, val movies: List<Movie>, val itemClickListener: ((index: Int) -> Unit)) :
+    GroupAdapter<ViewHolder>() {
 
-    var itemClickListener: ((index: Int) -> Unit)? = null
-
-    fun setOnItemClickListener(clique: ((index: Int) -> Unit)){
-        this.itemClickListener = clique
+    init{
+        movies.forEach{movie ->
+            add(MovieItem(movie))
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_list_item, parent, false)
-        return ViewHolder(view)
-    }
+    inner class MovieItem(val movie: Movie) : Item() {
 
-    override fun getItemCount(): Int {
-        return movies.size
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindView(context, movies[position], itemClickListener)
-    }
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        fun bindView(context: Context, movie: Movie, itemClickListener: ((index: Int) -> Unit)?) {
-            itemView.movieName.text = movie.title
-            itemView.movieGrade.text = movie.vote_average
+        override fun bind(viewHolder: ViewHolder, position: Int) {
+            viewHolder.containerView.movieName.text = movie.title
+            viewHolder.containerView.movieGrade.text = movie.vote_average
 
             GlideApp.with(context)
                 .load(movie.poster_url)
                 .placeholder(R.drawable.baseline_movie_black_48)
                 .centerCrop()
-                .into(itemView.imgMovie)
+                .into(viewHolder.containerView.imgMovie)
 
-            if(itemClickListener != null) {
-                itemView.setOnClickListener {
-                    itemClickListener.invoke(adapterPosition)
-                }
+            viewHolder.containerView.setOnClickListener {
+                itemClickListener(position)
             }
         }
+
+        override fun getLayout(): Int = R.layout.movie_list_item
+
     }
 }

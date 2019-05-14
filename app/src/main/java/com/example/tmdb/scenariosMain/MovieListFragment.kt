@@ -44,9 +44,7 @@ class MovieListFragment : Fragment() {
 
         // O Fragment é capaz de mapear a activity que está o instanciando
         activity?.let{ that ->
-            val adapter = TMDBAdapter(that, movies)
-
-            adapter.setOnItemClickListener { position ->
+            val adapter = TMDBAdapter(that, movies) { position ->
                 listener?.onFragmentInteraction(movies[position])
             }
 

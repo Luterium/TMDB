@@ -12,7 +12,7 @@
             android:roundIcon="@mipmap/app_logo"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".scenariosMain.MainActivity"
+        <activity android:name=".presentation.scene.movieList.MainActivity"
                   android:screenOrientation="portrait"
                   android:launchMode="singleTop">
             <intent-filter>

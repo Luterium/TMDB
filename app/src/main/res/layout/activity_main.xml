@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/grayish"
-        tools:context=".scenariosMain.MainActivity">
+        tools:context=".presentation.scene.movieList.MainActivity">
     <ProgressBar
             android:id="@+id/pbLoading"
             android:layout_width="wrap_content"
